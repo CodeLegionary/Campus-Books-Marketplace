@@ -169,10 +169,10 @@ jobs:
 
       - name: Verify Backend Endpoint (Simple Integration Test)
         # This is a very basic check to see if the backend is reachable.
-        # We'll use a temporary busybox container on the same network.
+        # We'll run the command directly inside the backend container.
         run: |
           echo "Verifying backend /actuator/health endpoint..."
-          docker run --rm --network app-network curlimages/curl:latest http://backend:8080/actuator/health || { echo "Backend health check failed!"; exit 1; }
+          docker compose exec backend curl "http://localhost:8080/actuator/health" || { echo "Backend health check failed!"; exit 1; }
           echo "Backend /actuator/health endpoint is reachable."
 
       - name: Teardown services
