@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck: # <-- Add this section
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s # Give the DB some time to boot before checks begin
+
+  backend:
+    build:
+      context: ./demo
+    ports:
+      - "8080:8080"
+    depends_on:
+      db: # <-- Change depends_on syntax for conditions
+        condition: service_healthy # <-- Wait until DB is healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/database
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      FRONTEND_URL: http://frontend:5173
+    networks:
+      - app-network
+frontend:
+  build:
+    context: ./Vite-Jsx
+  ports:
+    - "5173:80" # Map host port 5173 to container's port 80 (Nginx)
+  networks:
+    - app-network
+  environment:
+    # NODE_ENV: development # This might not be needed if Nginx serves static files
+    VITE_APP_API_BASE_URL: http://backend:8080
+volumes:
+  pgdata:
+
+networks:
+  app-network:
