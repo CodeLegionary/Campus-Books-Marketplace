@@ -147,7 +147,7 @@ jobs:
       # This is where you would execute your tests.
       # Since you don't have explicit test commands in your info, here are examples:
 
-      - name: Run Backend Unit Tests (example)
+      - name: Run Backend Unit Tests
         # Assuming you want to run these *before* building the image,
         # you'd put this in the build-and-push job, or if they require
         # a running DB, you can do it here.
@@ -155,6 +155,7 @@ jobs:
         # If you want to run tests *inside* the backend container:
         run: |
           echo "Running backend unit/integration tests..."
+          mvn test
           # Example: If your Spring Boot app has a test profile that
           # runs tests when the JAR is started in a specific way.
           # Or, if you have a separate test runner.
@@ -166,11 +167,14 @@ jobs:
           # that target the running services:
           # docker run --network container:backend postman/newman run my_collection.json
 
-      - name: Run Frontend Tests (example)
+      #- name: Run Frontend Tests
         # Similar to backend, these might be run during the 'build' stage
         # or as separate unit tests using 'npm test' directly on the source.
-        run: |
-          echo "Running frontend tests..."
+        #run: |
+          # echo "Running frontend tests..."
+          # cd Vite-jsx
+          # npm ci
+          # npm test
           # docker run --network container:frontend cypress/included:12.17.4 --record --key <cypress_key>
           # Or if you have Playwright/Selenium tests that access http://frontend:5173
           # Example to curl the frontend to ensure it's serving:
