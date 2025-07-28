@@ -1,0 +1,196 @@
+# .github/workflows/ci.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Grant permission to write to GHCR
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set lowercase owner name
+        run: echo "owner_lowercase=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      # Build and push Backend Image
+      - name: Build and push Backend Docker image
+        id: build-backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./demo # Path to your backend Dockerfile context
+          file: ./demo/Dockerfile # Path to your backend Dockerfile
+          push: true
+          tags: ghcr.io/${{ env.owner_lowercase }}/backend:${{ github.sha }}
+
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Build and push Frontend Image
+      - name: Build and push Frontend Docker image
+        id: build-frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Vite-Jsx # Path to your frontend Dockerfile context
+          file: ./Vite-Jsx/Dockerfile # Path to your frontend Dockerfile
+          push: true
+          tags: ghcr.io/${{ env.owner_lowercase }}/frontend:${{ github.sha }}
+
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Optional: Add a separate job for testing if your tests are extensive
+  # This makes it clearer and can allow parallel execution
+  test-services:
+    needs: build-and-push # Ensure images are built before testing
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read # Need to read images from GHCR
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Pull the newly built images from GHCR
+      - name: Pull Backend Image from GHCR
+        run: docker pull ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}
+
+      - name: Pull Frontend Image from GHCR
+        run: docker pull ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }}
+
+      - name: Update docker-compose.yml for CI (Optional, but recommended)
+        # This step dynamically modifies your docker-compose.yml to use the
+        # images from GHCR instead of building them locally.
+        # This is good practice to test the actual pushed images.
+        run: |
+          sed -i 's|build:\n      context: ./demo|image: ghcr.io/${{ github.repository_owner }}/backend:${{ github.sha }}|g' docker-compose.yml
+          sed -i 's|build:\n      context: ./Vite-Jsx|image: ghcr.io/${{ github.repository_owner }}/frontend:${{ github.sha }}|g' docker-compose.yml
+          # You might also want to remove the 'volumes' for 'pgdata' if not needed for CI tests,
+          # or if you want a clean DB every time. For full integration testing, keep it.
+          # sed -i '/volumes:/,+1d' docker-compose.yml
+          # sed -i '/pgdata:/d' docker-compose.yml
+
+      - name: Bring up services with Docker Compose
+        run: docker compose up -d
+
+      - name: Wait for services to be healthy
+        # Use a loop to check service health. This is more robust than a fixed sleep.
+        # Adjust timeout as needed.
+        timeout-minutes: 5 # Maximum time to wait
+        run: |
+          echo "Waiting for DB service to be healthy..."
+          for i in $(seq 1 10); do
+            DB_HEALTH=$(docker inspect --format='{{json .State.Health}}' $(docker compose ps -q db) | jq -r .Status)
+            echo "DB Status: $DB_HEALTH"
+            if [ "$DB_HEALTH" == "healthy" ]; then
+              echo "DB is healthy."
+              break
+            fi
+            sleep 10
+          done
+          if [ "$DB_HEALTH" != "healthy" ]; then
+            echo "DB service did not become healthy in time."
+            docker compose logs db
+            exit 1
+          fi
+
+          echo "Waiting for Backend service to be running..."
+          # For backend, checking 'running' state is often sufficient if it depends on healthy DB
+          for i in $(seq 1 10); do
+            BACKEND_STATUS=$(docker inspect --format='{{.State.Status}}' $(docker compose ps -q backend))
+            echo "Backend Status: $BACKEND_STATUS"
+            if [ "$BACKEND_STATUS" == "running" ]; then
+              echo "Backend is running."
+              break
+            fi
+            sleep 10
+          done
+          if [ "$BACKEND_STATUS" != "running" ]; then
+            echo "Backend service did not become running in time."
+            docker compose logs backend
+            exit 1
+          fi
+
+          echo "Services are up and running."
+          docker compose ps
+
+      # --- Placeholder for Running Tests ---
+      # This is where you would execute your tests.
+      # Since you don't have explicit test commands in your info, here are examples:
+
+      - name: Run Backend Unit Tests
+        # Assuming you want to run these *before* building the image,
+        # you'd put this in the build-and-push job, or if they require
+        # a running DB, you can do it here.
+        # This would usually be run directly on the source code, not the container.
+        # If you want to run tests *inside* the backend container:
+        run: |
+          echo "Running backend unit/integration tests..."
+          cd demo
+          mvn test
+          # Example: If your Spring Boot app has a test profile that
+          # runs tests when the JAR is started in a specific way.
+          # Or, if you have a separate test runner.
+          # For most Spring Boot projects, tests are run as part of 'mvn test'
+          # *before* the JAR is packaged. You already skip tests in Dockerfile.
+          # To run them in CI, you would add a step in the 'build-and-push' job
+          # for 'mvn test' before the 'mvn package'.
+          # Alternatively, if you have API tests (e.g., Postman/Newman, Cypress)
+          # that target the running services:
+          # docker run --network container:backend postman/newman run my_collection.json
+
+      #- name: Run Frontend Tests
+        # Similar to backend, these might be run during the 'build' stage
+        # or as separate unit tests using 'npm test' directly on the source.
+        #run: |
+          # echo "Running frontend tests..."
+          # cd Vite-jsx
+          # npm ci
+          # npm test
+          # docker run --network container:frontend cypress/included:12.17.4 --record --key <cypress_key>
+          # Or if you have Playwright/Selenium tests that access http://frontend:5173
+          # Example to curl the frontend to ensure it's serving:
+          # docker exec $(docker compose ps -q frontend) curl -f http://localhost/
+
+      - name: Verify Backend Endpoint (Simple Integration Test)
+        # This is a very basic check to see if the backend is reachable.
+        # Run this *from* a container that can reach the backend service,
+        # or from the host if ports are mapped (they are, but internal network is better).
+        # We'll use a temporary busybox container on the same network.
+        run: |
+          echo "Verifying backend /health endpoint..."
+          docker run --rm --network app-network curlimages/curl:latest http://backend:8080/actuator/health || { echo "Backend health check failed!"; exit 1; }
+          echo "Backend /health endpoint is reachable."
+
+      - name: Teardown services
+        if: always() # Ensure this runs even if previous steps fail
+        run: docker compose down
