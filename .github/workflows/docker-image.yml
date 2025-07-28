@@ -100,7 +100,7 @@ jobs:
           # sed -i '/pgdata:/d' docker-compose.yml
 
       - name: Bring up services with Docker Compose
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services to be healthy
         # Use a loop to check service health. This is more robust than a fixed sleep.
@@ -109,7 +109,7 @@ jobs:
         run: |
           echo "Waiting for DB service to be healthy..."
           for i in $(seq 1 10); do
-            DB_HEALTH=$(docker inspect --format='{{json .State.Health}}' $(docker-compose ps -q db) | jq -r .Status)
+            DB_HEALTH=$(docker inspect --format='{{json .State.Health}}' $(docker compose ps -q db) | jq -r .Status)
             echo "DB Status: $DB_HEALTH"
             if [ "$DB_HEALTH" == "healthy" ]; then
               echo "DB is healthy."
@@ -119,14 +119,14 @@ jobs:
           done
           if [ "$DB_HEALTH" != "healthy" ]; then
             echo "DB service did not become healthy in time."
-            docker-compose logs db
+            docker compose logs db
             exit 1
           fi
 
           echo "Waiting for Backend service to be running..."
           # For backend, checking 'running' state is often sufficient if it depends on healthy DB
           for i in $(seq 1 10); do
-            BACKEND_STATUS=$(docker inspect --format='{{.State.Status}}' $(docker-compose ps -q backend))
+            BACKEND_STATUS=$(docker inspect --format='{{.State.Status}}' $(docker compose ps -q backend))
             echo "Backend Status: $BACKEND_STATUS"
             if [ "$BACKEND_STATUS" == "running" ]; then
               echo "Backend is running."
@@ -136,12 +136,12 @@ jobs:
           done
           if [ "$BACKEND_STATUS" != "running" ]; then
             echo "Backend service did not become running in time."
-            docker-compose logs backend
+            docker compose logs backend
             exit 1
           fi
 
           echo "Services are up and running."
-          docker-compose ps
+          docker compose ps
 
       # --- Placeholder for Running Tests ---
       # This is where you would execute your tests.
@@ -179,7 +179,7 @@ jobs:
           # docker run --network container:frontend cypress/included:12.17.4 --record --key <cypress_key>
           # Or if you have Playwright/Selenium tests that access http://frontend:5173
           # Example to curl the frontend to ensure it's serving:
-          # docker exec $(docker-compose ps -q frontend) curl -f http://localhost/
+          # docker exec $(docker compose ps -q frontend) curl -f http://localhost/
 
       - name: Verify Backend Endpoint (Simple Integration Test)
         # This is a very basic check to see if the backend is reachable.
@@ -193,4 +193,4 @@ jobs:
 
       - name: Teardown services
         if: always() # Ensure this runs even if previous steps fail
-        run: docker-compose down
+        run: docker compose down
