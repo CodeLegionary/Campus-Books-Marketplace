@@ -103,12 +103,12 @@ jobs:
         # This is good practice to test the actual pushed images.
         # Using '|' as delimiter for sed to avoid issues with '/' in paths.
         run: |
-          # The '' after -i is for macOS compatibility, harmless on Linux
-          sed -i '' 's|build:\n      context: ./demo|image: ghcr.io/${{ env.owner_lowercase }}/backend:${{ github.sha }}|g' docker-compose.yml
-          sed -i '' 's|build:\n      context: ./Vite-Jsx|image: ghcr.io/${{ env.owner_lowercase }}/frontend:${{ github.sha }}|g' docker-compose.yml
+          # You could add '' after -i is for macOS compatibility, harmless on Linux
+          sed -i 's|build:\n      context: ./demo|image: ghcr.io/${{ env.owner_lowercase }}/backend:${{ github.sha }}|g' docker-compose.yml
+          sed -i 's|build:\n      context: ./Vite-Jsx|image: ghcr.io/${{ env.owner_lowercase }}/frontend:${{ github.sha }}|g' docker-compose.yml
           # Remove the 'volumes' line for the frontend, as we're testing the built image
           # This assumes 'volumes:' is directly followed by '- ./Vite-Jsx/dist:/usr/share/nginx/html'
-          sed -i '' '/volumes:/,+1d' docker-compose.yml
+          sed -i '/volumes:/,+1d' docker-compose.yml
 
       - name: Bring up services with Docker Compose
         run: docker compose up -d
