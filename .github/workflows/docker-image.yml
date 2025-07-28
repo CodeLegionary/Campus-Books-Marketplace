@@ -155,6 +155,7 @@ jobs:
         # If you want to run tests *inside* the backend container:
         run: |
           echo "Running backend unit/integration tests..."
+          cd demo
           mvn test
           # Example: If your Spring Boot app has a test profile that
           # runs tests when the JAR is started in a specific way.
