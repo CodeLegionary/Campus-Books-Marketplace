@@ -34,18 +34,15 @@ services:
       FRONTEND_URL: http://frontend:5173
     networks:
       - app-network
-frontend:
-  build:
-    context: ./Vite-Jsx
-  ports:
-    - "5173:80" # Map host port 5173 to container's port 80 (Nginx)
-  networks:
-    - app-network
-  environment:
-    # NODE_ENV: development # This might not be needed if Nginx serves static files
-    VITE_APP_API_BASE_URL: http://backend:8080
-volumes:
-  pgdata:
-
-networks:
-  app-network:
+  frontend:
+    build:
+      context: ./Vite-Jsx
+    ports:
+      - "5173:80" # Map host port 5173 to container's port 80 (Nginx)
+    networks:
+      - app-network
+    environment:
+      # NODE_ENV: development # This might not be needed if Nginx serves static files
+      VITE_APP_API_BASE_URL: http://backend:8080
+    volumes:
+      - ./Vite-Jsx/dist:/usr/share/nginx/html
