@@ -46,3 +46,6 @@ services:
       VITE_APP_API_BASE_URL: http://backend:8080
     volumes:
       - ./Vite-Jsx/dist:/usr/share/nginx/html
+networks:
+  app-network:
+    driver: bridge
