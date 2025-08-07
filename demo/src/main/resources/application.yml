@@ -11,14 +11,14 @@ spring:
 
   datasource:
     # url: jdbc:postgresql://localhost:5432/database
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://primary.database--ls828smnbk6x.addon.code.run:5432/database}
+    url: ${URL:jdbc:postgresql://db:5432/database}
     username: ${USERNAME:postgres}
     password: ${PASSWORD:password}
     driver-class-name: org.postgresql.Driver  # Explicit driver
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
