@@ -14,6 +14,14 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      URL: jdbc:postgresql://localhost:5432/testdb
+      USERNAME: test
+      PASSWORD: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
     permissions:
       contents: read
       packages: write # Grant permission to write to GHCR
