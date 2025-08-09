@@ -10,7 +10,7 @@ spring:
       initialize-schema: always
 
   datasource:
-    # url: jdbc:postgresql://localhost:5432/database
+    # url: jdbc:postgresql://localhost:5432/database or //db since docker
     url: ${URL}
     username: ${USERNAME}
     password: ${PASSWORD}
@@ -27,6 +27,15 @@ spring:
 
   datasource.hikari:
     connection-timeout: 30000  # Extend timeout for HikariCP
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
 
 logging:
   level:
