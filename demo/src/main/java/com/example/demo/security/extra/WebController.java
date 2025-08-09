@@ -8,6 +8,6 @@ public class WebController {
 
     @GetMapping("/")
     public String redirectToReact() {
-        return "redirect:http://localhost:5173/";
+        return "redirect:${FRONTEND_URL:http://localhost:5173}";
     }
 }
