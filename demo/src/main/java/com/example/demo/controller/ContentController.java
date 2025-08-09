@@ -1,15 +1,17 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 public class ContentController {
+    @Value("${FRONTEND_URL:http://localhost:5173}")
+    private String frontendUrl;
 
     @GetMapping("/req/login")
     public String login(){
@@ -23,6 +25,6 @@ public class ContentController {
 
     @GetMapping("/index")
     public void home(HttpServletResponse response) throws IOException {
-        response.sendRedirect("http://localhost:5173"); // Redirect correctly to React frontend
+        response.sendRedirect(frontendUrl); // Redirect correctly to React frontend
     }
 }
