@@ -6,11 +6,12 @@ import Account from "./pages/Account";
 import Card from "./pages/Card";
 import LandingPage from "./pages/LandingPage"; // <-- Import the new LandingPage component
 
-// Redirects to the backend login page
-const RedirectToLogin = () => <Navigate to="http://localhost:8080/req/login" replace />;
+
 // API_BASE_URL can stay here or be moved to LandingPage if it's only used there.
 // For now, let's keep it here, as other pages might need it.
 const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL || "http://localhost:8080";
+// Redirects to the backend login page
+const RedirectToLogin = () => <Navigate to={`${API_BASE_URL}/req/login`} replace />;
 
 const App = () => (
   <Router>
