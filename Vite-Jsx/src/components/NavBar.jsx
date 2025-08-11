@@ -8,7 +8,7 @@ const NavBar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('/req/logout', { method: 'GET', credentials: 'include' });
+            const response = await fetch(`${API_BASE_URL}/req/logout`, { method: 'GET', credentials: 'include' });
             if (response.ok) {
                 window.location.href = `${API_BASE_URL}/req/login`;
             } else {
