@@ -2,13 +2,15 @@ import { FaHome, FaPiggyBank, FaTimes, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
+const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL || "http://localhost:8080";
+
 const NavBar = () => {
 
     const handleLogout = async () => {
         try {
             const response = await fetch('/req/logout', { method: 'GET', credentials: 'include' });
             if (response.ok) {
-                window.location.href = "http://localhost:8080/req/login";
+                window.location.href = `${API_BASE_URL}/req/login`;
             } else {
                 console.error("Logout failed");
             }
