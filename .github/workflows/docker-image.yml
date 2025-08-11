@@ -71,7 +71,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            VITE_APP_API_BASE_URL=p01--backend--ls828smnbk6x.code.run
+            VITE_APP_API_BASE_URL=https://p01--backend--ls828smnbk6x.code.run
 
   test-services:
     needs: build-and-push # Ensure images are built before testing
