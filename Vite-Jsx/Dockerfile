@@ -12,8 +12,9 @@ ENV VITE_APP_API_BASE_URL=$VITE_APP_API_BASE_URL
 # Copy the rest of your application code
 COPY . .
 
+
 # Build the frontend for production
-RUN npm run build # This command generates optimized static files in the 'dist' directory
+RUN VITE_APP_API_BASE_URL=$VITE_APP_API_BASE_URL npm run build # This command generates optimized static files in the 'dist' directory
 
 # Stage 2: Serve the built static files using a lightweight web server (e.g., Nginx)
 FROM nginx:alpine
