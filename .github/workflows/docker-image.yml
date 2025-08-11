@@ -70,6 +70,8 @@ jobs:
           tags: ghcr.io/${{ steps.set_owner_lc.outputs.owner_lowercase }}/frontend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            VITE_APP_API_BASE_URL=p01--backend--ls828smnbk6x.code.run
 
   test-services:
     needs: build-and-push # Ensure images are built before testing

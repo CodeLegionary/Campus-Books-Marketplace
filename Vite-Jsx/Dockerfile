@@ -7,7 +7,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json first to leverage Docker's build cache
 COPY package*.json ./
 RUN npm install
-
+ARG VITE_APP_API_BASE_URL
+ENV VITE_APP_API_BASE_URL=$VITE_APP_API_BASE_URL
 # Copy the rest of your application code
 COPY . .
 
