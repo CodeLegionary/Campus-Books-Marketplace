@@ -14,9 +14,10 @@ public class ContentController {
     private String frontendUrl;
 
     @GetMapping("/req/login")
-    public String login(){
-        return "login";
-    }
+public String login(org.springframework.ui.Model model) {
+    model.addAttribute("frontendUrl", frontendUrl);
+    return "login";
+}
 
     @GetMapping("/req/signup")
     public String signup(){

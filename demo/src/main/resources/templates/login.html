@@ -11,7 +11,7 @@
 <h1>EPUB SPOT</h1>
 
 <section>
-    <form action="http://localhost:8080/req/login" method="post">
+    <form action="@{${frontendUrl}/req/login}" method="post">
         <h2>Login</h2>
         <div class="dialog-row">
             <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>
@@ -31,3 +31,4 @@
     </form>
 </section>
 </body>
+</html>
