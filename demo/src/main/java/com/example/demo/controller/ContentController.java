@@ -14,13 +14,17 @@ public class ContentController {
     private String frontendUrl;
 
     @GetMapping("/req/login")
-public String login(org.springframework.ui.Model model) {
-    model.addAttribute("frontendUrl", frontendUrl);
-    return "login";
-}
+    public String login(org.springframework.ui.Model model) {
+        model.addAttribute("frontendUrl", frontendUrl);
+        return "login";
+    }
+
+    @Value("${BACKEND_URL:http://localhost:8080}")
+        private String backendUrl;
 
     @GetMapping("/req/signup")
-    public String signup(){
+    public String signup(org.springframework.ui.Model model) {
+        model.addAttribute("backendUrl", backendUrl);
         return "signup";
     }
 
