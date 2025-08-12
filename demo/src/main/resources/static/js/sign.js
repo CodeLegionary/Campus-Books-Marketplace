@@ -120,8 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const jsonData = JSON.stringify(data);
 
             // L'URL /req/signup POST è gestito dal tuo RegistrationController
-            const form = document.querySelector('form');
-const backendUrl = form.getAttribute('data-backend-url') || "http://localhost:8080";
+            const backendUrl = "https://p01--backend--ls828smnbk6x.code.run";
 
 fetch(`${backendUrl}/req/signup`, {
                 method: 'POST',
