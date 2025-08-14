@@ -24,7 +24,7 @@ const NavBar = () => {
         <header className="navbar">
             <nav>
                 <div className="logo">
-                    <h1>&nbsp;EPUB📖SPOT</h1>
+                    <h1>&nbsp;BOOKS📖STORE</h1>
                 </div>
 
                 <div>
