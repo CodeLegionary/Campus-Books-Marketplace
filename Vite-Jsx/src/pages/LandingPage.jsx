@@ -127,7 +127,9 @@ const LandingPage = () => { // LandingPage no longer accepts adminEmail prop for
   return (
     <div className="landing-page">
       <header>
-        <h1 className="flag">Benvenut@ allo Store!</h1>
+        <div className="wrapper">
+          <h1 className="flag">Benvenut@ allo Store!</h1>
+        </div>
         <p>Scambia, compra o vendi i tuoi libri con altri studenti.</p>
       </header>
 
