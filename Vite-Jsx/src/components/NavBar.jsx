@@ -49,7 +49,7 @@ const NavBar = () => {
                     </li>
                     <li>
                         <button onClick={handleLogout} className="logout-button">
-                            <span className="text-nav">Logout</span>
+                            <span className="text-nav">SignIn</span>
                             <FaTimes className="icon-logout" />
                         </button>
                     </li>
