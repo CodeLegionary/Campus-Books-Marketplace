@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -15,15 +17,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import com.example.demo.model.UserService;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.List;
+import com.example.demo.model.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -103,9 +103,10 @@ public class SecurityConfig {
         serializer.setCookiePath("/");
         // IMPORTANT FOR LOCAL HTTP: Set secure to false.
         // For production with HTTPS, this MUST be true.
-        serializer.setUseSecureCookie(false);
+        serializer.setUseSecureCookie(true);
         serializer.setUseHttpOnlyCookie(true);
         // serializer.setDomainNamePattern("localhost");
+        serializer.setSameSite("None");
         return serializer;
     }
 
