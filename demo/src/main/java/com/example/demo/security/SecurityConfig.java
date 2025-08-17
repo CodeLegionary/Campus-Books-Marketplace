@@ -70,10 +70,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/admin/**").hasRole("ADMIN"); // 🛡️
                     registry.requestMatchers("/","/req/signup", "/index", "/css/**", "/images/**", "/js/**").permitAll();
-                    // CHANGE API HERE: registry.requestMatchers("/api/readProgress/**", "/api/books/**").permitAll().authenticated;
                     /*also add other methods below*/
                     registry.requestMatchers(HttpMethod.POST, "/api/cards/save").authenticated();
                     registry.requestMatchers("/api/cards/**", "/api/books/**").authenticated();
+                    registry.requestMatchers(HttpMethod.GET, "/api/user").authenticated();
                     registry.anyRequest().authenticated();
                 })
                 .cors(Customizer.withDefaults())

@@ -4,15 +4,21 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
+    public String role;
+    public boolean active;
+    public boolean reported;
 
-    public UserDto(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.email = user.getEmail();
+    // Constructors
+    public UserDto() {}
+
+    public UserDto(Long id, String username, String email, String role, boolean active, boolean reported) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.role = role;
+        this.active = active;
+        this.reported = reported;
     }
 
-    // Getters
-    public Long getId() { return id; }
-    public String getUsername() { return username; }
-    public String getEmail() { return email; }
+    // Getters and Setters not necessary
 }
