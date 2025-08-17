@@ -165,7 +165,7 @@ const LandingPage = () => { // LandingPage no longer accepts adminEmail prop for
         <h2>📥 Inserisci un libro da vendere</h2>
         <form onSubmit={handleSubmit}>
           <input placeholder="Titolo" required value={newBook.title} onChange={e => setNewBook({ ...newBook, title: e.target.value })} />
-          <textarea placeholder="Descrizione" required value={newBook.description} onChange={e => setNewBook({ ...newBook, description: e.target.value })} />
+          <textarea placeholder="Info Autori (e Edizione)" required value={newBook.description} onChange={e => setNewBook({ ...newBook, description: e.target.value })} />
           <input type="number" placeholder="Prezzo (€)" required value={newBook.price} onChange={e => setNewBook({ ...newBook, price: e.target.value })} />
           <select required value={newBook.pariANuovo} onChange={e => setNewBook({ ...newBook, pariANuovo: e.target.value })}>
             <option value="">Condizione</option>

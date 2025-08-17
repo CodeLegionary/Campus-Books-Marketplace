@@ -82,7 +82,7 @@ const Card = () => {
 
             <main>
                 <section className="card-upload" style={{ padding: "20px", margin: "20px" }}>
-                    <h2>Inserisci i dettagli della tua carta</h2>
+                    <h2>Inserisci una carta</h2>
                     {/* Form with onSubmit handler to trigger handleSubmit */}
                     <form 
                         onSubmit={handleSubmit} 

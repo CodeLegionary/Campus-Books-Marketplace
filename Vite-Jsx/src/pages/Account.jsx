@@ -9,9 +9,12 @@ const Account = ({ user }) => {
 
   return (
     <div className="account-page" style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
-      <header style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        {/* Fallback avatar using initials */}
-        <div
+      <header className="wrapper">
+        <h1 className='flag'>Il tuo Account</h1>
+      </header>
+
+      <div className="wrapper">
+          <div
           style={{
             width: '60px',
             height: '60px',
@@ -27,26 +30,21 @@ const Account = ({ user }) => {
         >
           {getInitials('user name')}
         </div>
+      </div>
 
-        <div><h1 className='flag'>Il tuo Account</h1>
-          <h2>user name</h2>
-          <p>user description</p>
-        </div>
-      </header>
-
-      <section style={{ marginTop: '30px' }}>
-        <h3>📧 Email</h3>
-        <p> user email</p>
-      </section>
-
-      <section style={{ marginTop: '30px' }}>
-        <h3>📚 Libri</h3>
         <div>
-          <p><strong>Inseriti:</strong> { 'Nessuno'}</p>
-          <p><strong>Venduti:</strong> { 'Nessuno'}</p>
-          <p><strong>Acquistati:</strong> { 'Nessuno'}</p>
+          <h2>user name: </h2>
+          <h3>User INFO</h3>
+          <p>Stato Utente: Attivo</p>
+          <p>Ruolo Utente: USER</p>
+          <p>Riportato: y</p>
         </div>
-      </section>
+      
+
+      <div style={{ marginTop: '30px' }}>
+        <h3>📧 Email di Registrazione</h3>
+        <p>user email</p>
+      </div>
     </div>
   );
 };
