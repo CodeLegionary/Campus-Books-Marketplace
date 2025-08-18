@@ -1,4 +1,4 @@
-package com.example.demo.model;
+/*package com.example.demo.model;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,3 +24,4 @@ public class UserRatingService {
         userRatingRepository.save(rating); // Single save, smart overwrite
     }
 }
+*/

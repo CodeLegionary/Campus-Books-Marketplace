@@ -1,4 +1,4 @@
-package com.example.demo.model;
+/*package com.example.demo.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,3 +19,4 @@ public interface UserRatingRepository extends JpaRepository<UserRating, Long> {
     // 📦 All ratings received by a user
     List<UserRating> findAllByTarget(User target);
 }
+*/

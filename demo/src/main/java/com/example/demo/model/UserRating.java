@@ -1,4 +1,4 @@
-package com.example.demo.model;
+/*package com.example.demo.model;
 
 import jakarta.persistence.*;
 
@@ -34,3 +34,4 @@ public class UserRating {
     public int getRating() { return rating; }
     public void setRating(int rating) { this.rating = rating; }
 }
+*/
