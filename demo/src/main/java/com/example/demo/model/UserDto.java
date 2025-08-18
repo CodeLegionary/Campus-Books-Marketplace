@@ -1,9 +1,9 @@
 package com.example.demo.model;
 
 public class UserDto {
-    private Long id;
-    private String username;
-    private String email;
+    public Long id;
+    public String username;
+    public String email;
     public String role;
     public boolean active;
     public boolean reported;
