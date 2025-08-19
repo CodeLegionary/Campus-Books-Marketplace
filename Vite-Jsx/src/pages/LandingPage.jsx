@@ -1,4 +1,3 @@
-// src/pages/LandingPage.jsx
 import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard"; // Adjust import path for BookCard
 
@@ -145,7 +144,7 @@ const LandingPage = () => { // LandingPage no longer accepts adminEmail prop for
 
       {fetchError && <div style={{ color: 'red', padding: '10px', border: '1px solid red', borderRadius: '5px', margin: '10px 0' }}>{fetchError}</div>}
 
-      <section className="book-links" id="links">
+      <section className="book-links-grid" id="links">
         {filteredBooks.length > 0 ? (
           filteredBooks.map(book => (
             <BookCard
@@ -179,4 +178,4 @@ const LandingPage = () => { // LandingPage no longer accepts adminEmail prop for
   );
 };
 
-export default LandingPage; // Export LandingPage
+export default LandingPage;

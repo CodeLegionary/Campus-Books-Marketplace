@@ -123,20 +123,28 @@ h2 {
   text-shadow: goldenrod 1px 1px 1px;
 }
 
-.book-links {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+
+.book-links-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-@media (min-width: 600px) {
-  .book-links {
-    flex-direction: row;
-    justify-content: space-around;
+@media (min-width: 640px) {
+  .book-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .book-link {
-    width: 25%;
+@media (min-width: 768px) {
+  .book-links-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .book-links-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
