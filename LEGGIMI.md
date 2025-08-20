@@ -39,6 +39,12 @@ Puoi modificare il file docker-compose.yml per adattarlo al tuo ambiente. Questo
 - **Utenti non autenticati**: (Un visitatore) può sfogliare una sorta di anteprima completa del marketplace.
 - **Utenti autenticati**: Hanno pieno accesso a tutte le funzionalità, inclusa la messa in vendita e l'acquisto di libri.
 
+### Ruoli & Autorizzazioni
+
+L'applicazione prevede una differenziazione dei ruoli ('USER', 'ADMIN'), anche se al momento è attivo solo il ruolo base. L'architettura è stata progettata per supportare futuri sviluppi, permettendo l'aggiunta di altri ruoli come 'ADMIN', utile per la gestione di un sito più grande con una task force amministrativa dedicata. Trattandosi di una demo, attività amministrative e di monitoraggio possono comunque essere eseguite tramite database.
+
 ## ⚠️ Avvertenze
 
-Questa è un'applicazione demo. Qualsiasi contenuto o funzionalità è illustrativo e non rappresenta una transazione commerciale reale, anche se il modello di base può evolvere in un prodotto finito. Per gestire transazioni reali, sarebbe necessario integrare servizi di terze parti come RazorPay, Stripe o simili.
+Questa è un'applicazione esemplificativa. Qualsiasi contenuto o funzionalità è illustrativo e non rappresenta una transazione commerciale reale, anche se il modello di base può evolvere in un prodotto finito. Per gestire transazioni reali, sarebbe necessario integrare servizi di terze parti come RazorPay, Stripe o simili.
+
+Pertanto, si sconsiglia l'inserimento di dati sensibili o credenziali di pagamento reali. E lo stesso vale per i dati di autenticazione. Sebbene vi siano misure di crittografia su questo fronte, il sito può funzionare benissimo con dati fittizi.

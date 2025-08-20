@@ -40,6 +40,12 @@ You can adjust the docker-compose.yml file to suit your environment. This specif
 - **Unauthenticated users**: (A visitor) can browse a sort of full preview of the marketplace.
 - **Authenticated users**: Have full access to all features, including listing and purchasing books.
 
+### Roles & Permissions
+
+The application features role differentiation ('USER', 'ADMIN'), though only the base role is currently active. The architecture was designed to support future development, allowing for the addition of other roles like 'ADMIN', which would be useful for managing a larger site with a dedicated administrative team. As this is a demo, administrative and monitoring activities can still be performed directly through the database.
+
 ## ⚠️ Disclaimer
 
-This is a demo application. All content and functionality are illustrative and do not represent real commercial transactions, even though the model is scalable and can be updated into a finished product. To handle actual transactions, third-party services (e.g., RazorPay, Stripe, etc.) would be required.
+This is a demo application. Any content or functionality is for illustrative purposes and do not represent real commercial transactions, even though the model is scalable and can be updated into a finished product. To handle actual transactions, third-party services (e.g., RazorPay, Stripe, etc.) would be required.
+
+Therefore, you can simply avoid entering any sensitive data or real payment credentials. The same applies to authentication data. While certain protective measures, such as encryption, are in place to demonstrate best practices, the site is fully functional with fictitious information.
