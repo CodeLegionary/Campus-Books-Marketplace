@@ -1,6 +1,6 @@
 .book-card {
     background: linear-gradient(225deg, rgb(76, 54, 0) 0%, grey 7%, black 50%, grey 90%, rgb(76, 54, 0) 100%);
-    color: rgb(195, 195, 195);
+    color: rgb(255, 255, 255);
     width: 95%;
     border-radius: 5%;
     margin: 10px 0; /* A bit less margin for small screens */
@@ -32,10 +32,16 @@
     }
 }
 
+.book-card h3 {
+    color: aquamarine;
+    text-shadow: gold 1px 1px 1px;
+}
+
 .book-card p {
     margin: 0.3rem;
     padding: 0.3rem;
-    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
+    color: aliceblue;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(22, 22, 22, 0.5);
     font-weight: 700;
     font-size: 1em;
 }
@@ -44,4 +50,36 @@
     .book-card p {
         font-size: 1.1em;
     }
+}
+
+.buy-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 0.8em;
+    transition: background-color 0.2s ease;
+}
+
+.buy-button:hover {
+    background-color: #218838;
+}
+
+.report-button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 0.8em;
+    transition: background-color 0.2s ease;
+}
+
+.report-button:hover {
+    background-color: #e0a800; /* A slightly darker yellow for the hover effect */
 }
