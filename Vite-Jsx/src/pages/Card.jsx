@@ -75,7 +75,7 @@ const Card = () => {
         <div className="class-page">
             <header>
                 <div className="wrapper">
-                    <h1 className="flag">Dettagli Carta</h1>
+                    <h1 className="flag">&nbsp;Dettagli Carta&nbsp;</h1>
                 </div>
                 <p>Salva qui la carta che userai per i tuoi acquisti o le tue vendite.</p>
             </header>

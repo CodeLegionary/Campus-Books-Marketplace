@@ -10,6 +10,10 @@
     font-weight: bold;
 }
 
+.user-info h2 {
+    color: rgb(0, 244, 244);
+}
+
 .user-info h3 {
     color: aquamarine;
     text-shadow: gold 1px 1px 1px;

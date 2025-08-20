@@ -4,7 +4,7 @@ nav {
     flex-direction: row; /* Stack items for small screens */
     align-items: center;
     justify-content:space-between;
-    background: #333;
+    background: #313131;
     color: white;
     width: 100%;
     z-index: 10;

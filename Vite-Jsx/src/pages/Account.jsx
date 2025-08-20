@@ -38,7 +38,7 @@ const Account = () => {
   return (
     <div className="account-page" style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
       <header className="wrapper">
-        <h1 className='flag'>Il tuo Account</h1>
+        <h1 className='flag'>&nbsp;Il tuo Account&nbsp;</h1>
       </header>
 
       <section className="user-info">
