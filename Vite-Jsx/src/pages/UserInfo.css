@@ -1,0 +1,17 @@
+.user-info {
+    background: linear-gradient(225deg, rgb(76, 54, 0) 0%, grey 7%, black 50%, grey 90%, rgb(76, 54, 0) 100%);
+    color: rgb(195, 195, 195);
+    width: 95%;
+    border-radius: 5%;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .user-info {
+        /* Impostiamo una larghezza massima fissa per evitare che diventi troppo grande */
+        max-width: 600px;
+    }
+}

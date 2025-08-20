@@ -1,0 +1,47 @@
+.book-card {
+    background: linear-gradient(225deg, rgb(76, 54, 0) 0%, grey 7%, black 50%, grey 90%, rgb(76, 54, 0) 100%);
+    color: rgb(195, 195, 195);
+    width: 95%;
+    border-radius: 5%;
+    margin: 10px 0; /* A bit less margin for small screens */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Inherit these styles from the main `book-links-grid` @media queries */
+@media (min-width: 640px) {
+    .book-card {
+        width: auto; /* Let the grid handle the width */
+    }
+}
+
+@media (min-width: 768px) {
+    .book-card {
+        width: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .book-card {
+        width: auto;
+    }
+}
+
+.book-card p {
+    margin: 0.3rem;
+    padding: 0.3rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    font-size: 1em;
+}
+
+@media (min-width: 1024px) {
+    .book-card p {
+        font-size: 1.1em;
+    }
+}

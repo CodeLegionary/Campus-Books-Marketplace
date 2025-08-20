@@ -66,41 +66,6 @@ body {
   background: linear-gradient(225deg, cornflowerblue, aqua, royalblue);
 }
 
-.reader-container {
-  width: 100%;  /* Ensure it doesn’t exceed the viewport */
-  height: 100vh; /* Make it fullscreen */
-  overflow: hidden; /* Prevent extra scrolling */
-}
-
-.carousel {
-  position: relative;
-  display: flex;
-  align-items: center; /* This ensures vertical centering */
-  justify-content: center;
-  width: auto;
-  margin: 20px 0;
-}
-
-.carousel button {
-  width: auto;
-  padding: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%); /* Centers the button vertically */
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.carousel button:first-of-type {
-  left: 10px; /* Adjust left position */
-}
-
-.carousel button:last-of-type {
-  right: 10px; /* Adjust right position */
-}
-
 .book-link {
   background: linear-gradient(225deg, rgb(76, 54, 0) 0%, grey 7%, black 50%, grey 90%, rgb(76, 54, 0) 100%);
   color: white;
@@ -121,6 +86,47 @@ h2 {
 .info {
   color: aliceblue;
   text-shadow: goldenrod 1px 1px 1px;
+}
+
+/* Stili mobile-first per il contenitore dei filtri */
+.filters {
+    display: flex;
+    flex-direction: column; /* Impilare gli elementi verticalmente */
+    gap: 1rem; /* Spazio tra gli input */
+    padding: 1rem;
+}
+
+/* Stili per tutti gli input e i select all'interno del contenitore */
+.filters input,
+.filters select {
+    width: 100%; /* Occupano l'intera larghezza su mobile */
+    padding: 0.75rem; /* Spazio interno più grande */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1rem; /* Rende il testo dell'input e del select più grande */
+}
+
+/* Pseudo-elemento per rendere il testo del placeholder più grande e stilizzato */
+.filters input::placeholder {
+    font-size: 1.1rem; /* Rende il testo del placeholder più grande */
+    color: #888;
+}
+
+/* Media Query per Schermi più Grandi (Tablet e Desktop) */
+@media (min-width: 768px) {
+    .filters {
+        flex-direction: row; /* Allineare gli elementi in una riga */
+        justify-content: center; /* Centrare gli elementi orizzontalmente */
+        align-items: center;
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+
+    .filters input,
+    .filters select {
+        /* Larghezza automatica per adattarsi allo spazio disponibile */
+        width: auto;
+    }
 }
 
 
@@ -146,5 +152,51 @@ h2 {
 @media (min-width: 1024px) {
   .book-links-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Stili per titoli (Mobile-First) */
+h1 {
+  font-size: 2.2rem;
+  margin: 0.8rem 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin: 0.7rem 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 0.6rem 0;
+}
+
+/* Stili per paragrafi */
+p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 0.5rem 0;
+}
+
+
+/* Media Query per Desktop e Schermi più Grandi */
+/* Qui aumentiamo le dimensioni dei caratteri per una migliore leggibilità */
+@media (min-width: 768px) {
+  p {
+    font-size: 1.5rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 2rem;
   }
 }

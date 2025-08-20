@@ -1,4 +1,4 @@
-// src/components/BookCard.jsx
+import './BookCard.css';
 
 const BookCard = ({ book, onSimpleReport, onBuyBook }) => { // Only accept necessary props
   return (

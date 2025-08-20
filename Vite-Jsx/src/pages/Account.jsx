@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import "./UserInfo.css";
 
 const Account = () => {
   const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL || "http://localhost:8080";
@@ -31,7 +32,7 @@ const Account = () => {
   }, [API_BASE_URL]);
 
   if (!user) {
-    return <p>Effettua il login per attivare il display dei dati...</p>;
+    return <p>Login necessario per il display dei dati...</p>;
   }
 
   return (
@@ -40,6 +41,7 @@ const Account = () => {
         <h1 className='flag'>Il tuo Account</h1>
       </header>
 
+      <section className="user-info">
       <div className="wrapper">
         <div
           style={{
@@ -60,17 +62,20 @@ const Account = () => {
       </div>
 
       <div>
-        <h2>user name: {user.username}</h2>
-        <h3>User INFO</h3>
+        <h2>User Name: {user.username}</h2>
+        <br/>
+        <h3>ℹ️ INFO</h3>
         <p>Stato Utente: {user.status || 'Attivo'}</p>
         <p>Ruolo Utente: {user.role || 'USER'}</p>
-        <p>Riportato: {user.reported ? 'y' : 'n'}</p>
+        <p>Segnalato: {user.reported ? 'Sì' : 'No'}</p>
       </div>
 
       <div style={{ marginTop: '30px' }}>
         <h3>📧 Email di Registrazione</h3>
         <p>{user.email}</p>
       </div>
+      </section>
+    
     </div>
   );
 };
