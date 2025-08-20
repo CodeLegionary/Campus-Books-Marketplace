@@ -55,6 +55,7 @@ const Account = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            margin: '5px auto'
           }}
         >
           {getInitials(user.username || '')}
@@ -62,7 +63,7 @@ const Account = () => {
       </div>
 
       <div>
-        <h2>User Name: {user.username}</h2>
+        <h2>User: {user.username}</h2>
         <br/>
         <h3>ℹ️ INFO</h3>
         <p>Stato Utente: {user.status || 'Attivo'}</p>
