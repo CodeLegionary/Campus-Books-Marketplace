@@ -32,13 +32,13 @@ const Account = () => {
   }, [API_BASE_URL]);
 
   if (!user) {
-    return <p>Login necessario per il display dei dati...</p>;
+    return <p>Cookies necessari per il display dei dati...</p>;
   }
 
   return (
     <div className="account-page" style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
       <header className="wrapper">
-        <h1 className='flag'>&nbsp;Il tuo Account&nbsp;</h1>
+        <h1 className='flag'>&nbsp;Il Tuo Account&nbsp;</h1>
       </header>
 
       <section className="user-info">
