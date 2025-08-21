@@ -15,7 +15,7 @@ L'intera applicazione è containerizzata e orchestrata utilizzando Docker. Ci so
 
 ## ⚙️ Istruzioni
 
-Per avviare il progetto in locale, usa Docker Compose:
+Per avviare il progetto in locale, assicurati prima che tutti gli url puntino ai contenitori corretti in localhost (normalmente 5432, 8080, 5173). Per alcuni form potrebbe essere necessario reimpostare manulamente tali valori. Quindi, usa Docker Compose:
 
 ```bash
 docker-compose up

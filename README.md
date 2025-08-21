@@ -15,7 +15,7 @@ The entire application is containerized and orchestrated using Docker. There are
 
 ## ⚙️ Instructions
 
-To run the project locally, use Docker Compose:
+To start the project locally, first make sure all URLs point to the correct containers on localhost (typically 5432, 8080, 5173). For some forms, you may need to manually reset these values. Then, use Docker Compose to launch the environment.
 
 ```bash
 docker-compose up
